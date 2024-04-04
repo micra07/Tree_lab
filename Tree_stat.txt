@@ -1,0 +1,23 @@
+Данные при заполнении 1000 чисел
+Vector insert time: 17.579ms
+Tree insert time: 21.345ms
+Vector search time: 263.94ms
+Tree search time: 269.075ms
+Vector insert and delete time time: 513.53ms
+Tree insert and delete time: 520.824ms
+
+Данные при заполнении 10000 чисел
+Vector insert time: 23.302ms
+Tree insert time: 71.863ms
+Vector search time: 1160.18ms
+Tree search time: 1217.88ms
+Vector insert and delete time time: 2317.75ms
+Tree insert and delete time: 2385.81ms
+
+Данные при заполнении 100000 чисел
+Vector insert time: 92.802ms
+Tree insert time: 382.238ms
+Vector search time: 6227.05ms
+Tree search time: 6540.1ms
+Vector insert and delete time time: 12411.4ms
+Tree insert and delete time: 12751.3ms
