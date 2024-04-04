@@ -63,70 +63,17 @@ int main()
 	Tree tree3 = tree2;
 	tree3.print();
 
-	int count = 1000;
-	int insert_count = 100;
-	int length = 1000;
+	vector<int> vec1 = { 3, 2, 2, 4 };
+	vector<int> vec2 = { 1, 2, 3, 4, 5, 6, 7, 1, 3, 4, 7 };
+	vector<int> vec3 = { 1, 1 };
 
-	int time_vec = 0;
-	int time_tree = 0;
+	vector<int> for_task1 = delete_repeat(vec1);
+	vector<int> for_task2 = delete_repeat(vec2);
+	vector<int> for_task3 = delete_repeat(vec3);
 
-	for (int i = 0; i < insert_count; ++i) {
-		int start_time = clock();
-		vector<int> vec = _random_vector(length, i);
-		time_vec += clock();
-	}
-
-	for (int i = 0; i < insert_count; ++i) {
-		int start_time = clock();
-		Tree tree_stat = _random_tree(length, i);
-		time_tree += clock();
-	}
-
-	cout << "Vector insert time: " << double(time_vec) / count << "ms" << endl;
-	cout << "Tree insert time: " << double(time_tree) / count << "ms" << endl;
-
-	vector<int> vector = _random_vector(length, 0);
-	Tree tree_stat = _random_tree(length, 0);
-
-
-	for (int i = 0; i < count; ++i) {
-		int start_time = clock();
-		srand(i);
-		std::find(vector.begin(), vector.end(), rand());
-		time_vec += clock();
-	}
-
-	for (int i = 0; i < count; ++i) {
-		int start_time = clock();
-		srand(i);
-		tree_stat.contains(rand());
-		time_tree += clock();
-	}
-
-	cout << "Vector search time: " << double(time_vec) / count << "ms" << endl;
-	cout << "Tree search time: " << double(time_tree) / count << "ms" << endl;
-
-	for (int i = 0; i < count; ++i) {
-		int start_time = clock();
-		srand(i);
-		vector.push_back(rand());
-		auto found = std::find(vector.begin(), vector.end(), rand());
-		if (found != vector.end()) {
-			vector.erase(found);
-		}
-		time_vec += clock();
-	}
-
-	for (int i = 0; i < count; ++i) {
-		int start_time = clock();
-		srand(i);
-		tree_stat.insert(rand());
-		tree_stat.erase(rand());
-		time_tree += clock();
-	}
-
-	cout << "Vector insert and delete time time: " << double(time_vec) / count << "ms" << endl;
-	cout << "Tree insert and delete time: " << double(time_tree) / count << "ms" << endl;
+	print(for_task1);
+	print(for_task2);
+	print(for_task3);
 
 	return 0;
 }

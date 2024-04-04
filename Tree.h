@@ -2,6 +2,7 @@
 #pragma once
 #include <iostream>
 #include <set>
+#include <vector>
 
 using namespace std;
 
@@ -216,3 +217,19 @@ public:
 	}
 };
 
+std::vector<int> delete_repeat(std::vector<int> vec) {
+	std::vector<int> unique_elements;
+	std::vector<int> result;
+
+	for (int i = 0; i < vec.size(); ++i) {
+		if ((std::count(unique_elements.begin(), unique_elements.end(), vec[i]) == 0)) {
+			unique_elements.push_back(vec[i]);
+			result.push_back(vec[i]);
+		}
+		else {
+			result.erase(std::remove(result.begin(), result.end(), vec[i]), result.end());
+		}
+	}
+
+	return result;
+}
