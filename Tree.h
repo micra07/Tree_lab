@@ -26,6 +26,7 @@ class Tree {
 	void remove(int key) {
 		Node* current = _root;
 		Node* prev = nullptr;
+
 		while (current && current->_data != key) {
 			prev = current;
 			if (key < current->_data) {
@@ -35,80 +36,58 @@ class Tree {
 				current = current->_right;
 			}
 		}
-		if (!current) return;
-		if (!prev && ((current->_left && !current->_right && (!current->_left->_left && !current->_left->_right)) || (current->_right && !current->_left && (!current->_right->_left && !current->_right->_right)))) {
-			Node* next = nullptr;
-			if (current->_left) {
-				current->_data = current->_left->_data;
-				next = current->_left;
-				current->_left = nullptr;
-				delete next;
-			}
-			if (current->_right) {
-				current->_data = current->_right->_data;
-				next = current->_right;
-				current->_right = nullptr;
-				delete next;
-			}
-			return;
-		}
-		if (!prev && !current->_right && !current->_left) {
-			_root = nullptr;
-			delete current;
-			return;
-		}
 
-		if (!current->_left && current->_right) {
-			if (prev && prev->_left == current) {
+		if (!current) return;
+
+		if (!current->_left) {
+			if (!prev) {
+				_root = current->_right;
+			}
+			else if (prev->_left == current) {
 				prev->_left = current->_right;
 			}
-			if (prev && prev->_right == current) {
+			else {
 				prev->_right = current->_right;
 			}
 			delete current;
-			return;
 		}
-		if (!current->_right && current->_left) {
-			if (prev && prev->_left == current) {
+		else if (!current->_right) {
+			if (!prev) {
+				_root = current->_left;
+			}
+			else if (prev->_left == current) {
 				prev->_left = current->_left;
 			}
-			if (prev && prev->_right == current) {
+			else {
 				prev->_right = current->_left;
 			}
 			delete current;
-			return;
-		}
-		if (current->_left) {
-			Node* replacement = current->_left;
-			while (replacement->_right) {
-				replacement = replacement->_right;
-			}
-			int replacement_data = replacement->_data;
-			erase(replacement->_data);
-			current->_data = replacement_data;
-			return;
-		}
-		if (current->_right) {
-			Node* replacement = current->_right;
-			while (replacement->_left) {
-				replacement = replacement->_left;
-			}
-			int replacement_data = replacement->_data;
-			erase(replacement->_data);
-			current->_data = replacement_data;
-			return;
 		}
 		else {
-			if (prev && prev->_left == current) {
-				prev->_left = current->_left;
+			Node* replacement = current->_right;
+			prev = nullptr;
+
+			while (replacement->_left) {
+				prev = replacement;
+				replacement = replacement->_left;
 			}
-			if (prev && prev->_right == current) {
-				prev->_right = current->_left;
+
+			current->_data = replacement->_data;
+
+			if (prev) {
+				if(replacement->_right){ 
+					prev->_left = replacement->_right; 
+				}
 			}
-			delete current;
+			else {
+				current->_right = replacement->_right;
+			}
+
+			delete replacement;
 		}
 	}
-	
+
+
 	void clear(Node* root) {
 		if (root) {
 			clear(root->_left);
