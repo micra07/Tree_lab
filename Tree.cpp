@@ -1,5 +1,3 @@
-#include <vector>
-#include <iostream>
 #include "Tree.h"
 #include <ctime>
 
