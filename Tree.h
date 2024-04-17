@@ -1,3 +1,4 @@
+
 #pragma once
 #include <iostream>
 #include <vector>
@@ -118,7 +119,6 @@ class Tree {
 				current = current->_left;
 			}
 			else current = current->_right;
-
 		}
 	}
 
@@ -195,12 +195,11 @@ public:
 };
 
 std::vector<int> delete_repeat(std::vector<int> vec) {
-	std::vector<int> unique_elements;
 	std::vector<int> result;
+	Tree tree;
 
 	for (int i = 0; i < vec.size(); ++i) {
-		if ((std::count(unique_elements.begin(), unique_elements.end(), vec[i]) == 0)) {
-			unique_elements.push_back(vec[i]);
+		if ((tree.insert(vec[i])==true)&&(std::find(result.begin(), result.end(), vec[i]) == result.end()||result.size()==0)) {
 			result.push_back(vec[i]);
 		}
 		else {
